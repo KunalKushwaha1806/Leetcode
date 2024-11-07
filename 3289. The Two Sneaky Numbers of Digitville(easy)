@@ -1,0 +1,12 @@
+class Solution:
+    def getSneakyNumbers(self, nums: List[int]) -> List[int]:
+        numbers=[]
+        detectives=[]
+        l=len(nums)
+        for i in range(0,l):
+            if(nums[i] not in numbers):
+                numbers.append(nums[i])
+            else:
+                detectives.append(nums[i])
+        return detectives
+        
