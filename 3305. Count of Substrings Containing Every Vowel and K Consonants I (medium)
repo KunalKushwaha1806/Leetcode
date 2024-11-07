@@ -1,0 +1,57 @@
+class Solution:
+    def is_vowel(self, ch):
+        return ch in 'aeiou'
+
+    def countOfSubstrings(self, word, k):
+        n = len(word)
+        count = 0
+        left = 0
+        vowel_count = [0] * 5  # To track occurrences of 'a', 'e', 'i', 'o', 'u'
+        total_vowels = 0
+        consonant_count = 0
+
+        def update_vowel_count(vowel, add):
+            nonlocal total_vowels
+            index = {'a': 0, 'e': 1, 'i': 2, 'o': 3, 'u': 4}[vowel]
+            if add:
+                if vowel_count[index] == 0:
+                    total_vowels += 1
+                vowel_count[index] += 1
+            else:
+                if vowel_count[index] == 1:
+                    total_vowels -= 1
+                vowel_count[index] -= 1
+
+        for right in range(n):
+            if self.is_vowel(word[right]):
+                update_vowel_count(word[right], True)
+            else:
+                consonant_count += 1
+
+            while total_vowels == 5 and consonant_count > k:
+                if self.is_vowel(word[left]):
+                    update_vowel_count(word[left], False)
+                else:
+                    consonant_count -= 1
+                left += 1
+            
+            if total_vowels == 5 and consonant_count == k:
+                # Count valid substrings from left to right
+                # Since we found a valid substring, we need to consider how many valid substrings we can get
+                temp_left = left
+                while total_vowels == 5 and consonant_count == k:
+                    count += 1  # Each valid substring
+                    if self.is_vowel(word[temp_left]):
+                        update_vowel_count(word[temp_left], False)
+                    else:
+                        consonant_count -= 1
+                    temp_left += 1
+
+                # Reset the vowel and consonant counts back after counting
+                for i in range(left, temp_left):
+                    if self.is_vowel(word[i]):
+                        update_vowel_count(word[i], True)
+                    else:
+                        consonant_count += 1
+
+        return count
