@@ -1,0 +1,13 @@
+bool isPowerOfTwo(int n) {
+    if (n <= 0) return false;
+    long long int arr[100];
+    for (int i = 0; i < 100; i++) {
+        arr[i] = pow(2, i);
+    }
+    for (int i = 0; i < 100; i++) {
+        if (arr[i] == n) {
+            return true;
+        }
+    }
+    return false;
+}
