@@ -1,0 +1,11 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        if dividend == -2147483648 and divisor == -1:
+            return 2147483647
+        
+        result = abs(dividend) // abs(divisor)
+        
+        if (dividend < 0) != (divisor < 0):
+            result = -result
+        
+        return max(min(result, 2147483647), -2147483648)
