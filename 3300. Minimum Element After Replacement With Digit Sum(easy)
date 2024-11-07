@@ -1,0 +1,23 @@
+int minElement(int* nums, int numsSize) {
+    int sum[numsSize];
+    int min;
+   
+    for(int i=0;i<numsSize;i++){
+        int temp=nums[i];
+        int p=0;
+        while(temp>0){
+            int s=temp%10;
+            p=p+s;
+            temp=temp/10;
+        }
+        sum[i]=p;
+
+    }
+    min=sum[0];
+    for(int i=1;i<numsSize;i++){
+        if(sum[i]<min){
+            min=sum[i];
+        }
+    }
+    return min;
+}
