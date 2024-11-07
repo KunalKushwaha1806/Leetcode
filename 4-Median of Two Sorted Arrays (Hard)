@@ -1,0 +1,15 @@
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        arr=nums1+nums2
+        arr.sort()
+        l=len(arr)
+        if l%2==1:
+            return arr[(l-1)//2]
+        else:
+            return (arr[(l-2)//2]+arr[l//2])/2
+
+with open("user.out", "w") as f:
+    inputs = map(loads, stdin)
+    for nums in inputs:
+        print(Solution().findMedianSortedArrays(nums, next(inputs)),file=f)
+exit(0)
