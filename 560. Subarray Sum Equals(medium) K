@@ -1,0 +1,21 @@
+class Solution(object):
+    def subarraySum(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        count = 0
+        presum = 0
+        presum_count = {0: 1} 
+        
+        for num in nums:
+            presum += num  
+            if (presum - k) in presum_count:
+                count += presum_count[presum - k]  
+            if presum in presum_count:
+                presum_count[presum] += 1 
+            else:
+                presum_count[presum] = 1  
+        
+        return count
