@@ -1,0 +1,9 @@
+from typing import List
+
+class Solution:
+    def maxGoodNumber(self, nums: List[int]) -> int:
+        binary_strings = [bin(num)[2:] for num in nums]
+        binary_strings.sort(reverse=True, key=lambda x: x * 10)  
+        max_binary_str = ''.join(binary_strings)
+        result = int(max_binary_str, 2)
+        return result
