@@ -1,0 +1,19 @@
+class Solution:
+    def findWords(self, words: List[str]) -> List[str]:
+        row1 = set("qwertyuiop")
+        row2 = set("asdfghjkl")
+        row3 = set("zxcvbnm")
+        
+        output = []
+        
+        for word in words:
+            
+            lower_word = word.lower()
+            if all(c in row1 for c in lower_word):
+                output.append(word)
+            elif all(c in row2 for c in lower_word):
+                output.append(word)
+            elif all(c in row3 for c in lower_word):
+                output.append(word)
+        
+        return output
