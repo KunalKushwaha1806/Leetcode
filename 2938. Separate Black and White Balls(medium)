@@ -1,0 +1,11 @@
+class Solution:
+    def minimumSteps(self, s: str) -> int:
+        blackcount=0
+        swap=0
+        for a in range(0,len(s)):
+            if(s[a]=="0"):
+                swap=swap+blackcount
+            else:
+                blackcount=blackcount+1
+        return swap
+        
