@@ -1,0 +1,13 @@
+from typing import List
+
+class Solution:
+    def minStartValue(self, nums: List[int]) -> int:
+        min_sum = float('inf')
+        current_sum = 0
+        for num in nums:
+            current_sum += num
+            min_sum = min(min_sum, current_sum)
+        if (min_sum <1):
+            return 1-min_sum
+        else:
+            return 1
