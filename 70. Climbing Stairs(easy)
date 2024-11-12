@@ -1,0 +1,13 @@
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        hop_mem = [0] * (n+1)
+ 
+        for i in range(0, n+1):
+            if i < 2:
+                hop_mem[i] = 1
+            else: 
+                hop_mem[i] = hop_mem[i - 1] + hop_mem[i - 2]
+
+        return hop_mem[n]
+        
