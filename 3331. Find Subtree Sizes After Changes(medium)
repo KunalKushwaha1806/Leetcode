@@ -1,0 +1,60 @@
+from typing import List
+from collections import defaultdict
+
+class Solution:
+    def findSubtreeSizes(self, parent: List[int], s: str) -> List[int]:
+        n = len(parent)
+        
+        # Step 1: Create adjacency list representation of the original tree.
+        tree = defaultdict(list)
+        for i in range(1, n):
+            tree[parent[i]].append(i)
+        
+        # Step 2: Dictionary to keep track of the most recent ancestor with the same character.
+        last_seen = {}
+        
+        # Step 3: DFS to re-parent nodes as per the problem statement.
+        new_tree = defaultdict(list)
+        
+        def dfs(node):
+            char = s[node]
+            if char in last_seen:
+                # Re-parent this node to the last seen ancestor with the same character.
+                parent_node = last_seen[char]
+                new_tree[parent_node].append(node)
+            else:
+                # Keep the original parent relationship if no re-parenting needed.
+                if node != 0:  # Skip the root node's parent which is -1.
+                    new_tree[parent[node]].append(node)
+            
+            # Mark this node as the last seen with this character.
+            previous = last_seen.get(char)
+            last_seen[char] = node
+            
+            # Continue DFS to children in the original tree.
+            for child in tree[node]:
+                dfs(child)
+            
+            # Restore the previous state after the recursion (backtrack).
+            if previous is None:
+                del last_seen[char]
+            else:
+                last_seen[char] = previous
+
+        # Run DFS starting from root node 0 to build new_tree.
+        dfs(0)
+        
+        # Step 4: Calculate subtree sizes in the re-parented tree.
+        subtree_size = [0] * n
+        
+        def calculate_sizes(node):
+            size = 1  # Start with the current node itself.
+            for child in new_tree[node]:
+                size += calculate_sizes(child)
+            subtree_size[node] = size
+            return size
+
+        # Run DFS starting from the root to calculate sizes.
+        calculate_sizes(0)
+        
+        return subtree_size
