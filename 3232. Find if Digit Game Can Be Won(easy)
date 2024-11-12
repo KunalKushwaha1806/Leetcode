@@ -1,0 +1,10 @@
+class Solution:
+    def canAliceWin(self, nums: List[int]) -> bool:
+        less=[]
+        greater=[]
+        for i in nums:
+            if i<10:
+                less.append(i)
+            else:
+                greater.append(i)
+        return sum(less)!=sum(greater)  
