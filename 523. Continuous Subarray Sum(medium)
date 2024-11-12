@@ -1,0 +1,16 @@
+def checkSubarraySum(nums: List[int], k: int) -> bool:
+    d={0:-1}
+    ream=0
+
+    for i in range(len(nums)):
+        ream=(ream+nums[i])%k
+        if ream in d:
+            if i-d[ream]>=2: return 'true'
+        else: d[ream]=i
+
+    return 'false'
+
+sys.stdout=open('user.out','w')
+for nums in map(loads,stdin):
+    print(checkSubarraySum(nums,int(stdin.readline())))
+exit()
