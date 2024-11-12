@@ -1,0 +1,17 @@
+class Solution:
+    def findXSum(self, nums: List[int], k: int, x: int) -> List[int]:
+        n = len(nums)
+        result=[]
+        for i in range(n-k+1):
+            subarray=nums[i:i+k]        
+            freq=Counter(subarray)
+            sorted_elements=sorted(freq.items(),key=lambda item:(-item[1],-item[0]))    
+            top_x_sum=0
+            count=0
+            for value, frequency in sorted_elements:
+                if count>=x:
+                    break
+                top_x_sum+=value*frequency
+                count+=1
+            result.append(top_x_sum)
+        return result
