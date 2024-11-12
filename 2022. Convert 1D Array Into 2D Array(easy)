@@ -1,0 +1,14 @@
+from typing import List
+
+class Solution:
+    def construct2DArray(self, original: List[int], m: int, n: int) -> List[List[int]]:
+        if len(original) != m * n:
+            return []
+        
+        b = [[0] * n for _ in range(m)]
+        ch = 0
+        for i in range(m):
+            for j in range(n):
+                b[i][j] = original[ch]
+                ch += 1
+        return b
