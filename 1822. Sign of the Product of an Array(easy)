@@ -1,0 +1,20 @@
+class Solution:
+    def arraySign(self, nums: List[int]) -> int:
+        product=1
+        a=0
+        for num in nums:
+            product=product*num
+        if(product>0):
+            a=1
+        elif(product<0):
+            a=-1
+        else:
+            a=0
+        return a
+        
+with open('user.out','w') as f:
+    for arr in map(loads, stdin):
+        print(Solution().arraySign(arr), file=f)
+exit(0) 
+            
+        
