@@ -1,0 +1,17 @@
+class Solution:
+    def countFairPairs(self, nums: List[int], lower: int, upper: int) -> int:
+        def find(nums, lower_bound):
+            left = 0
+            right = len(nums) - 1
+            count = 0
+            while left < right:
+                if nums[left] + nums[right] < lower_bound : 
+                    count += right - left
+                    left += 1
+                else:
+                    right -= 1
+            return count
+        nums.sort()
+        less_than_or_equal_upper = find(nums,upper+1)
+        less_than_lower = find(nums,lower)
+        return less_than_or_equal_upper - less_than_lower
