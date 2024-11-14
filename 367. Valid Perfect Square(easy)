@@ -1,0 +1,8 @@
+import math
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        for i in range(0,150000):
+            if(num==pow(i,2)):
+                return True
+                
+        return False
