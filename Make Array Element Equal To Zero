@@ -1,0 +1,20 @@
+class Solution:
+    def countValidSelections(self, nums: List[int]) -> int:
+        def simulate(start, direction):
+            nums_copy=nums[:]
+            curr=start
+            while 0<=curr<len(nums_copy):
+                if nums_copy[curr]==0:
+                    curr+=direction
+                else:
+                    nums_copy[curr]-=1
+                    direction*=-1
+                    curr+=direction
+            return all(x==0 for x in nums_copy)
+
+        return sum(
+            simulate(i,direction)
+            for i in range(len(nums))
+            if nums[i]==0
+            for direction in (-1,1)
+        )
