@@ -1,0 +1,10 @@
+class Solution:
+    def isPossibleToRearrange(self, s: str, t: str, k: int) -> bool:
+        if len(s)%k!=0:
+            return False
+        substring_length=len(s)//k
+        if Counter(s)!=Counter(t):
+            return False
+        substrings_t=[t[i:i+substring_length] for i in range(0,len(t), substring_length)]
+        substrings_s=[s[i:i+substring_length] for i in range(0,len(s), substring_length)]
+        return Counter(substrings_s)==Counter(substrings_t)
