@@ -1,0 +1,25 @@
+class Solution:
+    def shiftDistance(self, s: str, t: str, nextCost: List[int], previousCost: List[int]) -> int:
+        total_cost = 0
+        n = len(s)
+
+        for i in range(n):
+            current_char = s[i]
+            target_char = t[i]
+            
+            # Indices in the alphabet
+            current_idx = ord(current_char) - ord('a')
+            target_idx = ord(target_char) - ord('a')
+            
+            # Distance to shift forward or backward
+            forward_distance = (target_idx - current_idx) % 26
+            backward_distance = (current_idx - target_idx) % 26
+            
+            # Cost for forward and backward shifts
+            forward_cost = sum(nextCost[(current_idx + j) % 26] for j in range(forward_distance))
+            backward_cost = sum(previousCost[(current_idx - j) % 26] for j in range(backward_distance))
+            
+            # Add the minimum cost to the total
+            total_cost += min(forward_cost, backward_cost)
+        
+        return total_cost
