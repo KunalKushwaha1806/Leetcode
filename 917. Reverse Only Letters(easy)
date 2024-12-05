@@ -1,0 +1,13 @@
+class Solution:
+    def reverseOnlyLetters(self, s: str) -> str:
+        string = list(s)
+        letters = [char for char in string if char.isalpha()] 
+        letters.reverse()  
+        letter_index = 0  
+
+        for i in range(len(string)):
+            if string[i].isalpha():
+                string[i] = letters[letter_index]
+                letter_index += 1
+
+        return ''.join(string)
