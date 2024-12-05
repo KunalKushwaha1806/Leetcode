@@ -1,0 +1,18 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int compare(const void* a, const void* b)
+{
+    return *(int*)a-*(int*)b;
+}
+int* sortedSquares(int* nums, int numsSize, int* returnSize) {
+    int *arr,i;
+    arr=malloc(numsSize * sizeof(int));
+    *returnSize=numsSize;
+    for(i=0;i<numsSize;i++)
+    {
+        arr[i]=nums[i]*nums[i];
+    }
+    qsort(arr,numsSize,sizeof(int),compare);
+    return arr;
+}
