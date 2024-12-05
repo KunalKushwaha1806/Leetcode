@@ -1,0 +1,12 @@
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        list=[]
+        a=len(s)
+        for i in range(0,a):
+            if(s[i].isalpha() or s[i].isalnum()):
+                list.append(s[i].lower())
+        list=' '.join(list)
+        return list==list[::-1]
+
+
+        
