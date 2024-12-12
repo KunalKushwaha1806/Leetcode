@@ -1,0 +1,16 @@
+from string import ascii_lowercase
+
+class Solution:
+    def isSumEqual(self, firstWord: str, secondWord: str, targetWord: str) -> bool:
+        ans1 = ''
+        ans2 = ''
+        ans3 = ''
+        dict={v:k for k,v in enumerate(ascii_lowercase)}
+        for i in range(len(firstWord)):
+            ans1+=str(dict[firstWord[i]])
+        for i in range(len(secondWord)):
+            ans2+=str(dict[secondWord[i]])
+        for i in range(len(targetWord)):
+            ans3+=str(dict[targetWord[i]])
+        
+        return int(ans1)+int(ans2)==int(ans3)
